@@ -4,10 +4,22 @@ if (Meteor.isClient) {
   };
 
   Template.main.events({
-    'click input': function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
+    'keyup textarea': function (e) {
+      var $textarea = $(e.currentTarget);
+      var textareaText = $textarea.val()
+      var text = $('.text').text();
+      var match = text.match('^' + textareaText);
+      
+      if(match !== null) {
+        var matchText = match[0];
+        $('.text-correct span').text(matchText);
+        $('.text-incorrect span').text(textareaText);
+        if(text.length == matchText.length) {
+          alert('You won!');
+        }
+      } else {
+        $('.text-incorrect span').text(textareaText);
+      }
     }
   });
 }

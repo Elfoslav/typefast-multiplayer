@@ -1,0 +1,33 @@
+/* CSS declarations go here */
+body {
+  font-family: sans-serif;
+}
+
+.text-wrapper {
+  position: relative;
+  .text-correct, .text-incorrect {
+    top: 0;
+    left: 0;
+    margin-top: 0;
+  }
+  .text-correct {
+    z-index: 2;
+    color: green;
+    display: inline-block;
+    span {
+      background: white;
+    }
+  }
+  .text-incorrect {
+    z-index: 1;
+    color: red;
+    display: inline-block;
+    span {
+      background: red;
+    }
+  }
+}
+
+.absolute {
+  position: absolute;
+}
