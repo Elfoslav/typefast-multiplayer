@@ -7,12 +7,30 @@
 </body>
 
 <template name="main">
-  <h1>Welcome to Typefast! <span>({{usersCount}} users online)</span></h1>
-  <div class="text-wrapper">
-    <div class="text">{{text}}</div>
-    <div class="text-correct absolute"><span></span></div>
-    <div class="text-incorrect absolute"><span></span></div>
+  <div class="content">
+    <h1>Welcome to Typefast competition! <span>({{usersCount}} users online)</span></h1>
+    <div class="text-wrapper">
+      <div class="text">{{text}}</div>
+      <div class="text-correct absolute"><span></span></div>
+      <div class="text-incorrect absolute"><span></span></div>
+    </div>
+    <br/>
+    
+    <div class="textarea-wrapper ">
+      <p class="wait-text">Wait for a competitor...</p>
+      <p class="start-typing-text hidden">Start typing text above:</p>
+      <textarea disabled></textarea>
+    </div>
+    
+    <div class="competitor-wrapper">
+      <p>Waiting for your competitor...</p>
+      <br/>
+      {{> spinner}}
+      
+      <div class="competitor-ready hidden">
+        <p>See what your competitor is typing:</p>
+        <div class="competitor"></div>
+      </div>
+    </div>
   </div>
-  <br/>
-  <textarea rows="5" cols="100"></textarea>
 </template>

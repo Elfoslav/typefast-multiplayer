@@ -4,7 +4,6 @@ Template.main.text = function () {
 
 Template.main.usersCount = function() {
   Meteor.call('getOnlineUsersCount', function(err, count) {
-    console.log('usersCount', count);
     Session.set('usersCount', count);
   });
   return Session.get('usersCount');
