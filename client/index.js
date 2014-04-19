@@ -1,28 +1,28 @@
-var uuid = Meteor.uuid();
-console.log('logging with id:', uuid);
+Client.uuid = Meteor.uuid();
+console.log('logging with id:', Client.uuid);
 var roomId;
 
-textStream.emit('join', uuid);
-
-sendText = function(text, roomId) {
-  textStream.emit('text', { text: text, roomId: roomId });
-  console.log('me: ' + text);
-};
-
-textStream.on('text', function(text) {
-  console.log('user: ' + text + ', by ' + this.subscriptionId);
-});
+textStream.emit('join', Client.uuid);
 
 //emited from server from join
-textStream.on('afterJoin' + uuid, function(data) {
+textStream.on('afterJoin' + Client.uuid, function(data) {
   roomId = data.roomId;
   
   textStream.on('exitRoom' + roomId, function() {
+    Session.set('ready', false);
     console.log('user leaved this room');
   });
   
   textStream.on('start' + roomId, function() {
+    Session.set('ready', true);
     console.log('start game...: ');
+  });
+  
+  textStream.on('updateCompetitorText' + roomId, function(data) {
+    if(data.uuid != Client.uuid) {
+      //update only competitor's text not mine
+      $('.competitor').text(data.text);
+    }
   });
   
   console.log('subId', this.subscriptionId);

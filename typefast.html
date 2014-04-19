@@ -17,20 +17,26 @@
     <br/>
     
     <div class="textarea-wrapper ">
-      <p class="wait-text">Wait for a competitor...</p>
-      <p class="start-typing-text hidden">Start typing text above:</p>
-      <textarea disabled></textarea>
+      {{#if ready}}
+        <p class="start-typing-text">Start typing text above:</p>
+        <textarea placeholder="start typing..."></textarea>
+      {{else}}
+        <p class="wait-text">Wait for a competitor...</p>
+        <textarea disabled></textarea>
+      {{/if}}
     </div>
     
     <div class="competitor-wrapper">
-      <p>Waiting for your competitor...</p>
-      <br/>
-      {{> spinner}}
-      
-      <div class="competitor-ready hidden">
-        <p>See what your competitor is typing:</p>
-        <div class="competitor"></div>
-      </div>
+      {{#if ready}}
+        <div class="competitor-ready">
+          <p>See what your competitor is typing:</p>
+          <div class="competitor"></div>
+        </div>
+      {{else}}
+        <p>Waiting for your competitor...</p>
+        <br/>
+        {{> spinner}}
+      {{/if}}
     </div>
   </div>
 </template>

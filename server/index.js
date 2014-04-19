@@ -84,6 +84,11 @@ textStream.on('join', function(uuid) {
   }
 });
 
+textStream.on('text', function(text, uuid) {
+  var roomId = App.subscriptionGroup[this.subscriptionId];
+  textStream.emit('updateCompetitorText' + roomId, { text: text, uuid: uuid });
+});
+
 textStream.permissions.write(function(event) {
   return true;
 });

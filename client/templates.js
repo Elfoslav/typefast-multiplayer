@@ -9,12 +9,19 @@ Template.main.usersCount = function() {
   return Session.get('usersCount');
 }
 
+Template.main.ready = function() {
+  return Session.get('ready');
+}
+
 Template.main.events({
   'keyup textarea': function (e) {
     var $textarea = $(e.currentTarget);
     var textareaText = $textarea.val()
     var text = $('.text').text();
     var match = text.match('^' + textareaText);
+    
+    console.log('Client', Client);
+    textStream.emit('text', textareaText, Client.uuid);
     
     if(match !== null) {
       var matchText = match[0];
