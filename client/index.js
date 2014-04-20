@@ -11,6 +11,7 @@ textStream.on('afterJoin' + Client.uuid, function(data) {
   textStream.on('exitRoom' + roomId, function() {
     Session.set('ready', false);
     console.log('user leaved this room');
+    alert('user leaved this match, wait for another one');
   });
   
   textStream.on('start' + roomId, function() {
@@ -22,6 +23,8 @@ textStream.on('afterJoin' + Client.uuid, function(data) {
     if(data.uuid != Client.uuid) {
       //update only competitor's text not mine
       $('.competitor').text(data.text);
+      $('.competitor-textarea').val(data.text);
+      $('.competitor-textarea').trigger('change');
     }
   });
   

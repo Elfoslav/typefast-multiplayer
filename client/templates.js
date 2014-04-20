@@ -20,7 +20,8 @@ Template.main.events({
     var text = $('.text').text();
     var match = text.match('^' + textareaText);
     
-    console.log('Client', Client);
+    console.log(encodeURIComponent(window.location.href));
+    
     textStream.emit('text', textareaText, Client.uuid);
     
     if(match !== null) {
@@ -28,7 +29,12 @@ Template.main.events({
       $('.text-correct span').text(matchText);
       $('.text-incorrect span').text(textareaText);
       if(text.length == matchText.length) {
-        alert('You won!');
+        var share = confirm('You won! Do you want to share it?');
+        if(share) {
+          window.location.href = 'http://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href);
+        } else {
+          window.location.reload();
+        }
       }
     } else {
       $('.text-incorrect span').text(textareaText);
@@ -37,5 +43,12 @@ Template.main.events({
   'click .text': function(e){
     console.log('keydown e.which:', e.which);
     e.preventDefault();
+  },
+  "change .competitor-textarea": function(e) {
+    var $textarea = $(e.currentTarget);
+    var text = $('.text').text();
+    if(text == $textarea.val()) {
+      alert('You lost. Your competitor was first.');
+    }
   }
 });
