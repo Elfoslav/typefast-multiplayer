@@ -1,5 +1,11 @@
 /* CSS declarations go here */
+html {
+  height: 100%;
+}
 body {
+  min-height: 100%;
+  margin: 0;
+  position: relative;
   font-family: sans-serif;
   -webkit-user-select: none;
      -moz-user-select: -moz-none;
@@ -62,6 +68,17 @@ body {
 .content {
   width: 1000px;
   margin: auto;
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  width: 99%;
+  bottom: 30px;
+}
+
+.center-text {
+  text-align: center;
 }
 
 .hidden {
